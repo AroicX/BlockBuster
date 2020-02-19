@@ -12,7 +12,7 @@ class FilmController extends Controller
 {
    public function index()
    {
-      $films = Film::all();
+      $films = Film::with('Comments')->paginate(12);
 
       return response()->json([
           'status' => 200,

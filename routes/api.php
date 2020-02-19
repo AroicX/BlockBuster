@@ -31,6 +31,13 @@ $api->version('v1', function (Router $api) {
     
         });
 
+        $api->group(['prefix' => 'comments'], function(Router $api) {
+            $api->get('/', 'App\\Api\\V1\\Controllers\\CommentController@index');
+            $api->post('/create', 'App\\Api\\V1\\Controllers\\CommentController@create');
+            $api->get('/find/{film_id}', 'App\\Api\\V1\\Controllers\\CommentController@show');
+    
+        });
+
 
     });
 
