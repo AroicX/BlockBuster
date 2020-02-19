@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Film;
+use App\Comment;
 class FilmsSeeder extends Seeder
 {
     /**
@@ -41,6 +42,27 @@ class FilmsSeeder extends Seeder
             'genre'             =>  json_encode(['Thriller','Action','Comdey']),
             'photo'             =>  'https://upload.wikimedia.org/wikipedia/en/b/b1/Rambo_-_Last_Blood_official_theatrical_poster.jpg',
         ]);
+
+        //seed comments
+        Comment::create([
+            'film_id'              => 1,
+            'name'              => 'User 1',
+            'comment'       => 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ',
+        ]);
+        Comment::create([
+            'film_id'              => 2,
+            'name'              => 'User 2',
+            'comment'       => 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ',
+        ]);
+        Comment::create([
+            'film_id'              => 3,
+            'name'              => 'User 2',
+            'comment'       => 'Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. ',
+        ]);
+
+
+
+        
 
 
        
