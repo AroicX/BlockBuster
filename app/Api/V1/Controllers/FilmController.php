@@ -33,7 +33,7 @@ class FilmController extends Controller
     $this->validateParameter('description', $request->description, STRING);
     $this->validateParameter('release_date', $request->release_date, STRING);
     $this->validateParameter('rating', $request->rating, INTEGER);
-    $this->validateParameter('ticket_price', $request->ticket_price, FLOAT);
+    $this->validateParameter('ticket_price', $request->ticket_price, INTEGER);
     $this->validateParameter('country', $request->country, STRING);
     $this->validateParameter('genre', $request->genre, OBJECT);
     $this->validateParameter('photo', $request->photo, STRING);

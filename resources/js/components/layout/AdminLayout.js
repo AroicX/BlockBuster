@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Film from './../../Pages/Films'
 
 class AdminLayout extends Component {
 
@@ -15,6 +16,7 @@ class AdminLayout extends Component {
         if (cache && typeof JSON.parse(cache) === 'object') {
 
             this.setState({userIn: true})
+            
           
         }else{
             return(
@@ -24,10 +26,13 @@ class AdminLayout extends Component {
 
     }
 
+
+    
     render() {
+        
         return (
             <div>
-                Welcome in
+            <Film/>
             </div>
         );
     }

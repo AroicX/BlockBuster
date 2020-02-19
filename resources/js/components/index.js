@@ -46,26 +46,15 @@ class App extends Component {
       ) : null;
     });
 
-    if (auth) {
-        return (
-          <Aux>
-            <ScrollToTop>
-              <Suspense fallback={<Loader />}>
-                <Switch>
-                  <Route path="/" component={AdminLayout} />
-                </Switch>
-              </Suspense>
-            </ScrollToTop>
-          </Aux>
-        );
-      } else {
+   
+      
         return (
           <Aux>
             <ScrollToTop>
               <Suspense fallback={<Loader />}>
                 <Switch>
                   {menu}
-                  <Route path="/" component={AdminLayout} />
+                
                 </Switch>
               </Suspense>
             </ScrollToTop>
@@ -73,6 +62,6 @@ class App extends Component {
         );
       }
   }
-}
+
 
 export default App;

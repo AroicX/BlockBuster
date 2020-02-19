@@ -1,9 +1,9 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[1],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[6],{
 
-/***/ "./resources/js/Pages/Auth/Login.js":
-/*!******************************************!*\
-  !*** ./resources/js/Pages/Auth/Login.js ***!
-  \******************************************/
+/***/ "./resources/js/Pages/Create.js":
+/*!**************************************!*\
+  !*** ./resources/js/Pages/Create.js ***!
+  \**************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -13,6 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-select */ "./node_modules/react-select/dist/react-select.browser.esm.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -36,26 +37,45 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var Login =
+var options = [{
+  value: 'Action',
+  label: 'Action'
+}, {
+  value: 'Thriller',
+  label: 'Thriller'
+}, {
+  value: 'Comdey',
+  label: 'Comdey'
+}, {
+  value: 'Ficition',
+  label: 'Ficition'
+}, {
+  value: 'Sci-fi',
+  label: 'Sci-fi'
+}];
+
+var Create =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Login, _Component);
+  _inherits(Create, _Component);
 
-  function Login(props) {
+  function Create(props) {
     var _this;
 
-    _classCallCheck(this, Login);
+    _classCallCheck(this, Create);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Login).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Create).call(this, props));
     _this.state = {
       isLoading: false,
-      error: null
+      error: null,
+      selectedOption: null
     };
     _this.handleOnchange = _this.handleOnchange.bind(_assertThisInitialized(_this));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(Login, [{
+  _createClass(Create, [{
     key: "handleOnchange",
     value: function handleOnchange(event) {
       var target = event.target;
@@ -64,40 +84,51 @@ function (_Component) {
       this.setState(_defineProperty({}, name, value));
     }
   }, {
+    key: "handleChange",
+    value: function handleChange(selectedOption) {
+      this.setState({
+        selectedOption: selectedOption
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      var login = function login(e) {
-        console.log('fired...');
+      var selectedOption = this.state.selectedOption;
+
+      var create = function create(e) {
         e.preventDefault();
+        var sort = [];
+
+        _this2.state.selectedOption.map(function (item) {
+          sort.push(item.value);
+        });
+
         var data = {
-          email: _this2.state.email,
-          password: _this2.state.password
+          name: _this2.state.name,
+          description: _this2.state.description,
+          release_date: _this2.state.release,
+          rating: _this2.state.rating,
+          ticket_price: _this2.state.ticket,
+          country: _this2.state.country,
+          genre: sort,
+          photo: _this2.state.photo
         };
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/auth/login", data).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/films/create", data).then(function (res) {
           console.log(res);
           console.log(res.data.status);
 
-          if (res.data.status === 'ok') {
-            var userData = JSON.stringify({
-              token: res.data.token,
-              user: res.data.user
-            });
-            localStorage.setItem('staleState', userData);
-            window.location.replace('/films');
+          if (res.data.status === 200) {
+            window.location.replace("/films");
           }
         })["catch"](function (err) {
-          _this2.setState({
-            error: 'Email or Password not vaild'
-          });
-
           console.error(err);
         });
       };
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "Login"
+        className: "register"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -113,70 +144,89 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-center text-muted mb-4"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: login
+        onSubmit: create
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "text-center my-5"
-      }, " Please Signin "), this.state.error != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, " Add Film "), this.state.error != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "alert alert-danger",
         role: "alert"
-      }, this.state.error) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group mb-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-group input-group-alternative"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-group-prepend"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "input-group-text"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "ni ni-email-83"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-control",
-        placeholder: "Email",
-        type: "email",
-        name: "email",
-        onChange: this.handleOnchange,
-        required: true
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.state.error) : "", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-group input-group-alternative"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-group-prepend"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "input-group-text"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "ni ni-lock-circle-open"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         className: "form-control",
-        placeholder: "Password",
-        name: "password",
-        type: "password",
+        type: "text",
+        name: "name",
         onChange: this.handleOnchange,
         required: true
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "custom-control custom-control-alternative custom-checkbox"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "custom-control-input",
-        id: " customCheckLogin",
-        type: "checkbox"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-        className: "custom-control-label",
-        htmlFor: " customCheckLogin"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "text-muted"
-      }, "Remember me"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Description"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        className: "form-control",
+        type: "text",
+        name: "description",
+        onChange: this.handleOnchange,
+        required: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Release Date"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "date",
+        name: "release",
+        onChange: this.handleOnchange,
+        required: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Rating "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "number",
+        name: "rating",
+        maxLength: "5",
+        onChange: this.handleOnchange,
+        required: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Ticket Price"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "number",
+        name: "ticket",
+        onChange: this.handleOnchange,
+        required: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Country "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "text",
+        name: "country",
+        onChange: this.handleOnchange,
+        required: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Genre "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_select__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        isMulti: true,
+        value: selectedOption,
+        onChange: this.handleChange,
+        options: options
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Photo "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        className: "form-control",
+        type: "link",
+        name: "photo",
+        onChange: this.handleOnchange,
+        required: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
-        className: "btn btn-primary py-3 my-4 btn-lg"
-      }, "Sign in"))))))))));
+        className: "btn btn-primary btn-lg"
+      }, "Add"))))))))));
     }
   }]);
 
-  return Login;
+  return Create;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Login);
+/* harmony default export */ __webpack_exports__["default"] = (Create);
 
 /***/ })
 

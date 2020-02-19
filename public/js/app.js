@@ -74293,7 +74293,7 @@ var Loader = function Loader() {
 
 var AdminLayout = react_loadable__WEBPACK_IMPORTED_MODULE_3___default()({
   loader: function loader() {
-    return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./layout/AdminLayout */ "./resources/js/components/layout/AdminLayout.js"));
+    return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./layout/AdminLayout */ "./resources/js/components/layout/AdminLayout.js"));
   },
   loading: Loader
 });
@@ -74341,22 +74341,9 @@ function (_Component) {
           }
         }) : null;
       });
-
-      if (auth) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Aux__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ScrollToTop__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
-          fallback: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Loader, null)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-          path: "/",
-          component: AdminLayout
-        })))));
-      } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Aux__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ScrollToTop__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
-          fallback: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Loader, null)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, menu, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-          path: "/",
-          component: AdminLayout
-        })))));
-      }
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Aux__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ScrollToTop__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Suspense"], {
+        fallback: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Loader, null)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, menu))));
     }
   }]);
 
@@ -74410,10 +74397,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
 var Login = react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./../Pages/Auth/Login */ "./resources/js/Pages/Auth/Login.js"));
+  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./../Pages/Auth/Login */ "./resources/js/Pages/Auth/Login.js"));
+});
+var Register = react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./../Pages/Auth/Register */ "./resources/js/Pages/Auth/Register.js"));
 });
 var Films = react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
-  return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./../Pages/Others/Films */ "./resources/js/Pages/Others/Films.js"));
+  return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../Pages/Films */ "./resources/js/Pages/Films.js"));
+});
+var Create = react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return Promise.all(/*! import() */[__webpack_require__.e(3), __webpack_require__.e(6)]).then(__webpack_require__.bind(null, /*! ../Pages/Create */ "./resources/js/Pages/Create.js"));
+});
+var Single = react__WEBPACK_IMPORTED_MODULE_0___default.a.lazy(function () {
+  return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./../Pages/Single */ "./resources/js/Pages/Single.js"));
 });
 var route = [{
   path: '/films',
@@ -74421,10 +74417,24 @@ var route = [{
   name: 'Films',
   component: Films
 }, {
-  path: '/guest',
+  path: '/films/create',
+  exact: true,
+  name: 'Create',
+  component: Create
+}, {
+  path: '/films/:id(\\d+)',
+  name: 'Single',
+  component: Single
+}, {
+  path: '/login',
   exact: true,
   name: 'Login',
   component: Login
+}, {
+  path: '/register',
+  exact: true,
+  name: 'Register',
+  component: Register
 }];
 /* harmony default export */ __webpack_exports__["default"] = (route);
 

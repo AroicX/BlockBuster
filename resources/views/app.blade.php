@@ -15,15 +15,59 @@
 
 	<!-- CSS files -->
 	<link rel="stylesheet" href="css/plugins.css">
-	<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
+    
 
 </head>
-<body i>
+<body >
+    <div id="preloader">
+		<img class="logo" src="images/logo1.png" alt="" width="119" height="58">
+		<div id="status">
+			<span></span>
+			<span></span>
+		</div>
+    </div>
+
+    
+    
+    <header class="ht-header">
+		<div class="container">
+			<nav class="navbar navbar-default navbar-custom">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header logo">
+					<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<div id="nav-icon1">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+					</div>
+					<a href="index-2.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
+				</div>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+				
+					<ul class="nav navbar-nav flex-child-menu menu-right">
+					
+					
+					
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</nav>
+
+			<!-- top search form -->
+		
+		</div>
+    </header>
+    
+
     <div id="app"></div>
 
 
- 
-    <script src="{{ asset('js/app.js') }}"></script>
+
+   
     	<!-- footer section-->
 	<footer class="ht-footer">
 		<div class="container">
@@ -74,7 +118,7 @@
 		</div>
 		<div class="ft-copyright">
 			<div class="ft-left">
-				<p><a target="_blank" href="https://www.templateshub.net">Templates Hub</a></p>
+			
 			</div>
 			<div class="backtotop">
 				<p><a href="#" id="back-to-top">Back to top <i class="ion-ios-arrow-thin-up"></i></a></p>
@@ -82,11 +126,11 @@
 		</div>
 	</footer>
 	<!-- end of footer section-->
-
 	<script src="js/jquery.js"></script>
 	<script src="js/plugins.js"></script>
 	<script src="js/plugins2.js"></script>
 	<script src="js/custom.js"></script>
-   
+    
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

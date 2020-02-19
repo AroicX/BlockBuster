@@ -16,7 +16,7 @@ Route::get('reset_password/{token}', ['as' => 'password.reset', function($token)
     // implement your reset password route here!
 }]);
 
-Route::view('/{path?}', 'app');
+Route::view('/{path?}', 'app')->where('path', '.*');;
 
 
 // Route::get('{slug}', function() {

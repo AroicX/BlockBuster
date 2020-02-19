@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from 'axios'
 
-class Login extends Component {
+class Register extends Component {
 
 
     constructor(props){
@@ -28,26 +28,20 @@ class Login extends Component {
 
   render() {
 
-    const login = e => {
+    const register = e => {
       console.log('fired...')
       e.preventDefault();
 
 
-      const data = { email: this.state.email, password: this.state.password };
+      const data = { name: this.state.name, email: this.state.email, password: this.state.password };
 
       axios
-        .post(`/api/auth/login`, data)
+        .post(`/api/auth/signup`, data)
         .then(res => {
           console.log(res)
           console.log(res.data.status)
           if(res.data.status === 'ok'){
-            let userData = JSON.stringify({
-              token: res.data.token,
-              user: res.data.user,
-  
-          });
-
-          localStorage.setItem('staleState',userData);
+           
 
           window.location.replace('/films')
 
@@ -64,7 +58,7 @@ class Login extends Component {
     }
 
     return (
-      <div className="Login">
+      <div className="register">
         <div className="main-content">
           
           <div className="container mt--8 pb-5 push-down">
@@ -75,8 +69,8 @@ class Login extends Component {
                     <div className="text-center text-muted mb-4">
                       
                     </div>
-                    <form onSubmit={login}>
-                      <h5 className="text-center my-5"> Please Signin </h5>
+                    <form onSubmit={register}>
+                      <h5 className="text-center my-5"> Create Account </h5>
 
 
                     {
@@ -88,6 +82,23 @@ class Login extends Component {
                     ''
                     }
 
+                      <div className="form-group mb-3">
+                        <div className="input-group input-group-alternative">
+                          <div className="input-group-prepend">
+                            <span className="input-group-text">
+                              <i className="ni ni-email-83"></i>
+                            </span>
+                          </div>
+                          <input
+                            className="form-control"
+                            placeholder="Name"
+                            type="text"
+                            name="name"
+                            onChange={this.handleOnchange}
+                            required
+                          />
+                        </div>
+                      </div>
                       <div className="form-group mb-3">
                         <div className="input-group input-group-alternative">
                           <div className="input-group-prepend">
@@ -138,7 +149,7 @@ class Login extends Component {
                       </div>
                       <div className="text-center">
                         <button type="submit" className="btn btn-primary py-3 my-4 btn-lg">
-                          Sign in
+                          Create Account 
                         </button>
                       </div>
                     </form>
@@ -156,4 +167,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;

@@ -1,7 +1,8 @@
 import React from 'react';
-const Login = React.lazy(() => import('./../Pages/Auth/Login'));
+const Film = React.lazy(() => import('./../Pages/Film'));
 const route = [
-    { path: '/guest', exact: true, name: 'Login', component: Login },
+    { path: '/', exact: true, name: 'Film', component: Film },
+    { path: '/films/:id(\\d+)',  name: 'Single', component: Single },
   
 ];
 
