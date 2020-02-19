@@ -20,16 +20,18 @@ $api->version('v1', function (Router $api) {
     });
 
 
+     
+    $api->group(['prefix' => 'films'], function(Router $api) {
+        $api->get('/', 'App\\Api\\V1\\Controllers\\FilmController@index');
+        $api->post('/create', 'App\\Api\\V1\\Controllers\\FilmController@create');
+        $api->get('/find/{id}', 'App\\Api\\V1\\Controllers\\FilmController@show');
+
+    });
+
    
 
     $api->group(['middleware' => 'jwt.auth'], function(Router $api) {
-    
-        $api->group(['prefix' => 'films'], function(Router $api) {
-            $api->get('/', 'App\\Api\\V1\\Controllers\\FilmController@index');
-            $api->post('/create', 'App\\Api\\V1\\Controllers\\FilmController@create');
-            $api->get('/find/{id}', 'App\\Api\\V1\\Controllers\\FilmController@show');
-    
-        });
+   
 
         $api->group(['prefix' => 'comments'], function(Router $api) {
             $api->get('/', 'App\\Api\\V1\\Controllers\\CommentController@index');

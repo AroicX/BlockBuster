@@ -16,6 +16,10 @@ Route::get('reset_password/{token}', ['as' => 'password.reset', function($token)
     // implement your reset password route here!
 }]);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/{path?}', 'app');
+
+
+// Route::get('{slug}', function() {
+//     return view('app');
+// })
+// ->where('slug', '(?!api)([A-z\d-\/_.]+)?');

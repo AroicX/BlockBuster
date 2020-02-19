@@ -64,6 +64,7 @@ class FilmController extends Controller
 
    public function show($id = null)
    {
+
     
    $film = Film::where('id',$id)->with('Comments')->first();
 
