@@ -1,9 +1,9 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
 
-/***/ "./resources/js/Pages/Auth/Register.js":
-/*!*********************************************!*\
-  !*** ./resources/js/Pages/Auth/Register.js ***!
-  \*********************************************/
+/***/ "./resources/js/Pages/Auth/Login.js":
+/*!******************************************!*\
+  !*** ./resources/js/Pages/Auth/Login.js ***!
+  \******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -36,17 +36,17 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var Register =
+var Login =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(Register, _Component);
+  _inherits(Login, _Component);
 
-  function Register(props) {
+  function Login(props) {
     var _this;
 
-    _classCallCheck(this, Register);
+    _classCallCheck(this, Login);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Register).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Login).call(this, props));
     _this.state = {
       isLoading: false,
       error: null
@@ -55,7 +55,7 @@ function (_Component) {
     return _this;
   }
 
-  _createClass(Register, [{
+  _createClass(Login, [{
     key: "handleOnchange",
     value: function handleOnchange(event) {
       var target = event.target;
@@ -68,19 +68,23 @@ function (_Component) {
     value: function render() {
       var _this2 = this;
 
-      var register = function register(e) {
+      var login = function login(e) {
         console.log('fired...');
         e.preventDefault();
         var data = {
-          name: _this2.state.name,
           email: _this2.state.email,
           password: _this2.state.password
         };
-        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/auth/signup", data).then(function (res) {
+        axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/auth/login", data).then(function (res) {
           console.log(res);
           console.log(res.data.status);
 
           if (res.data.status === 'ok') {
+            var userData = JSON.stringify({
+              token: res.data.token,
+              user: res.data.user
+            });
+            localStorage.setItem('staleState', userData);
             window.location.replace('/films');
           }
         })["catch"](function (err) {
@@ -93,7 +97,7 @@ function (_Component) {
       };
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "register"
+        className: "Login"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "main-content"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -109,30 +113,13 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "text-center text-muted mb-4"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: register
+        onSubmit: login
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "text-center my-5"
-      }, " Create Account "), this.state.error != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, " Please Signin "), this.state.error != null ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "alert alert-danger",
         role: "alert"
       }, this.state.error) : '', react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "form-group mb-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-group input-group-alternative"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "input-group-prepend"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "input-group-text"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "ni ni-email-83"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        className: "form-control",
-        placeholder: "Name",
-        type: "text",
-        name: "name",
-        onChange: this.handleOnchange,
-        required: true
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-group mb-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "input-group input-group-alternative"
@@ -182,14 +169,14 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",
         className: "btn btn-primary py-3 my-4 btn-lg"
-      }, "Create Account"))))))))));
+      }, "Sign in"))))))))));
     }
   }]);
 
-  return Register;
+  return Login;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (Register);
+/* harmony default export */ __webpack_exports__["default"] = (Login);
 
 /***/ })
 

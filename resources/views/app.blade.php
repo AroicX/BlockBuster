@@ -1,36 +1,41 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name=viewport content="width=device-width, initial-scale=1">
-	<meta name="format-detection" content="telephone-no">
-   
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Films </title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-  
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<meta name="format-detection" content="telephone-no">
+
+	<!-- CSRF Token -->
+	<meta name="csrf-token" content="{{ csrf_token() }}">
+
+	<title>Films </title>
+	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
 
 	<!-- CSS files -->
 	<link rel="stylesheet" href="css/plugins.css">
-    <link rel="stylesheet" href="css/style.css">
-    
+	<link rel="stylesheet" href="css/style.css">
+
 
 </head>
-<body >
-    <div id="preloader">
+
+<body>
+	<div id="preloader">
 		<img class="logo" src="images/logo1.png" alt="" width="119" height="58">
 		<div id="status">
 			<span></span>
 			<span></span>
 		</div>
-    </div>
+	</div>
 
-    
-    
-    <header class="ht-header">
+
+	<div id="app">
+
+
+	<!-- BEGIN | Header -->
+	<header class="ht-header">
 		<div class="container">
 			<nav class="navbar navbar-default navbar-custom">
 				<!-- Brand and toggle get grouped for better mobile display -->
@@ -43,32 +48,37 @@
 							<span></span>
 						</div>
 					</div>
-					<a href="index-2.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
+					<router-link to="/"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></router-link>
 				</div>
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
-				
+
 					<ul class="nav navbar-nav flex-child-menu menu-right">
-					
-					
-					
+						
+						<li><router-link to="/films">Films</router-link></li>
+						<li class="loginLink"><router-link to="#">LOG In</router-link></li>
+						<li class="btn signupLink"><router-link to="#">sign up</router-link></li>
 					</ul>
 				</div>
 				<!-- /.navbar-collapse -->
 			</nav>
 
-			<!-- top search form -->
-		
+
 		</div>
-    </header>
-    
-
-    <div id="app"></div>
+	</header>
+	<!-- END | Header -->
 
 
 
-   
-    	<!-- footer section-->
+		<div class="slider movie-items">
+			<div class="container">
+				<router-view></router-view>
+			</div>
+		</div>
+	</div>
+
+
+
 	<footer class="ht-footer">
 		<div class="container">
 			<div class="flex-parent-ft">
@@ -118,7 +128,7 @@
 		</div>
 		<div class="ft-copyright">
 			<div class="ft-left">
-			
+
 			</div>
 			<div class="backtotop">
 				<p><a href="#" id="back-to-top">Back to top <i class="ion-ios-arrow-thin-up"></i></a></p>
@@ -130,7 +140,8 @@
 	<script src="js/plugins.js"></script>
 	<script src="js/plugins2.js"></script>
 	<script src="js/custom.js"></script>
-    
-    <script src="{{ asset('js/app.js') }}"></script>
+
+	<script src="{{ asset('js/app.js') }}"></script>
 </body>
+
 </html>
