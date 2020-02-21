@@ -145,8 +145,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      films: []
+    };
+  },
   mounted: function mounted() {
-    console.log('Component ready.');
+    this.getFilms();
+  },
+  methods: {
+    getFilms: function getFilms() {
+      console.log('fired....');
+    }
   }
 });
 

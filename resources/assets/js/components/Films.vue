@@ -16,10 +16,21 @@
 
 <script>
     export default {
-        mounted() {
-            
+        data(){
+            return{
+                films: []
+            }
+        },
 
-            console.log('Component ready.')
+        mounted() {
+            this.getFilms();
+
+        
+        },
+        methods: {
+            getFilms(){
+                console.log('fired....')
+            }
         }
 
       
