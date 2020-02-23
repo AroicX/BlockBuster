@@ -18,6 +18,7 @@ Vue.use(VueRouter)
 
 let  routes = [
     { path: '/films', component: require('./components/Films.vue').default, default: true },
+    { path: '/films/:film_id', component: require('./components/Single.vue').default, default: true },
     { path: '/example', component: require('./components/Example.vue').default }
   ]
 
