@@ -2014,6 +2014,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2030,10 +2032,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
+    var _this = this;
+
     var id = this.$route.params.film_id;
-    console.log(id);
+    axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/films/find/".concat(id)).then(function (res) {
+      var result = res.data.data;
+      console.log(result);
+      return false;
+
+      _this.setState({
+        film: result
+      });
+    })["catch"](function (err) {
+      return console.error;
+    });
   },
   mounted: function mounted() {
     console.log('Component ready.');

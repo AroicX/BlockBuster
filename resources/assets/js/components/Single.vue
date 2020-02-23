@@ -15,13 +15,24 @@
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
-        created(){
-           let id = this.$route.params.film_id;
-           console.log(id);
+        created() {
+            let id = this.$route.params.film_id;
+            axios
+                .get(`/api/films/find/${id}`)
+                .then(res => {
+                    let result = res.data.data;
+                    console.log(result);
+                    return false;
+                    this.setState({
+                        film: result
+                    });
+                })
+                .catch(err => console.error);
         },
         mounted() {
-            
+
             console.log('Component ready.')
         }
     }
