@@ -1,4 +1,6 @@
 <template>
+<div class="slider movie-items">
+			<div class="container">
     <div class="row">
         <div class="social-link">
             <p>Follow us: </p>
@@ -32,6 +34,8 @@
 
         </div>
     </div>
+        </div>
+        </div>
 </template>
 
 <script>

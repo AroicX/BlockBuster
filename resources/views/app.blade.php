@@ -34,47 +34,53 @@
 	<div id="app">
 
 
-	<!-- BEGIN | Header -->
-	<header class="ht-header">
-		<div class="container">
-			<nav class="navbar navbar-default navbar-custom">
-				<!-- Brand and toggle get grouped for better mobile display -->
-				<div class="navbar-header logo">
-					<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-						<span class="sr-only">Toggle navigation</span>
-						<div id="nav-icon1">
-							<span></span>
-							<span></span>
-							<span></span>
-						</div>
-					</div>
-					<router-link to="/"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></router-link>
-				</div>
-				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
-
-					<ul class="nav navbar-nav flex-child-menu menu-right">
-						
-						<li><router-link to="/films">Films</router-link></li>
-						<li class="loginLink"><router-link to="#">LOG In</router-link></li>
-						<li class="btn signupLink"><router-link to="#">sign up</router-link></li>
-					</ul>
-				</div>
-				<!-- /.navbar-collapse -->
-			</nav>
-
-
-		</div>
-	</header>
-	<!-- END | Header -->
-
-
-
-		<div class="slider movie-items">
+		<!-- BEGIN | Header -->
+		<header class="ht-header">
 			<div class="container">
-				<router-view></router-view>
+				<nav class="navbar navbar-default navbar-custom">
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="navbar-header logo">
+						<div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							<span class="sr-only">Toggle navigation</span>
+							<div id="nav-icon1">
+								<span></span>
+								<span></span>
+								<span></span>
+							</div>
+						</div>
+						<router-link to="/"><img class="logo" src="images/logo1.png" alt="" width="119" height="58">
+						</router-link>
+					</div>
+					<!-- Collect the nav links, forms, and other content for toggling -->
+					<div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
+
+						<ul class="nav navbar-nav flex-child-menu menu-right">
+
+							<li>
+								<router-link to="/films">Films</router-link>
+							</li>
+							<li class="loginLink">
+								<router-link to="#">LOG In</router-link>
+							</li>
+							<li class="btn signupLink">
+								<router-link to="#">sign up</router-link>
+							</li>
+						</ul>
+					</div>
+					<!-- /.navbar-collapse -->
+				</nav>
+
+
 			</div>
-		</div>
+		</header>
+		<!-- END | Header -->
+
+
+
+
+		<router-view></router-view>
+
+
 	</div>
 
 

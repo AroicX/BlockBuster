@@ -1979,6 +1979,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2016,6 +2020,100 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2034,23 +2132,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      film: []
+    };
+  },
   created: function created() {
     var _this = this;
 
     var id = this.$route.params.film_id;
     axios__WEBPACK_IMPORTED_MODULE_0___default.a.get("/api/films/find/".concat(id)).then(function (res) {
-      var result = res.data.data;
-      console.log(result);
-      return false;
+      var result = _objectSpread({}, res.data.data);
 
-      _this.setState({
-        film: result
-      });
+      _this.film = result;
     })["catch"](function (err) {
       return console.error;
     });
   },
   mounted: function mounted() {
+    console.log(film);
     console.log('Component ready.');
   }
 });
@@ -32904,59 +33004,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "row" },
-    [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._l(_vm.films, function(film) {
-        return _c("div", { key: film.id }, [
-          _c(
-            "div",
-            { staticClass: "col-md-3", staticStyle: { "margin-top": "15px" } },
-            [
-              _c("div", { staticClass: "movie-item" }, [
-                _c("div", { staticClass: "mv-img" }, [
-                  _c("a", { attrs: { href: "#" } }, [
-                    _c("img", {
-                      attrs: {
-                        src: film.photo,
-                        alt: "",
-                        width: "285",
-                        height: "437"
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "title-in" }, [
-                  _vm._m(1, true),
-                  _vm._v(" "),
-                  _c(
-                    "h6",
-                    [
-                      _c("router-link", { attrs: { to: /films/ + film.id } }, [
-                        _vm._v(_vm._s(film.name))
+  return _c("div", { staticClass: "slider movie-items" }, [
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        { staticClass: "row" },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _vm._l(_vm.films, function(film) {
+            return _c("div", { key: film.id }, [
+              _c(
+                "div",
+                {
+                  staticClass: "col-md-3",
+                  staticStyle: { "margin-top": "15px" }
+                },
+                [
+                  _c("div", { staticClass: "movie-item" }, [
+                    _c("div", { staticClass: "mv-img" }, [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _c("img", {
+                          attrs: {
+                            src: film.photo,
+                            alt: "",
+                            width: "285",
+                            height: "437"
+                          }
+                        })
                       ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("p", [
-                    _c("i", { staticClass: "ion-android-star" }),
-                    _c("span", [_vm._v(_vm._s(film.rating))]),
-                    _vm._v(" /5")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "title-in" }, [
+                      _vm._m(1, true),
+                      _vm._v(" "),
+                      _c(
+                        "h6",
+                        [
+                          _c(
+                            "router-link",
+                            { attrs: { to: /films/ + film.id } },
+                            [_vm._v(_vm._s(film.name))]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c("p", [
+                        _c("i", { staticClass: "ion-android-star" }),
+                        _c("span", [_vm._v(_vm._s(film.rating))]),
+                        _vm._v(" /5")
+                      ])
+                    ])
                   ])
-                ])
-              ])
-            ]
-          )
-        ])
-      })
-    ],
-    2
-  )
+                ]
+              )
+            ])
+          })
+        ],
+        2
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -33015,28 +33124,205 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "page-single movie-single movie_single" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row ipad-width2" }, [
+          _c("div", { staticClass: "col-md-4 col-sm-12 col-xs-12" }, [
+            _c("div", { staticClass: "movie-img sticky-sb" }, [
+              _c("img", { attrs: { src: _vm.film.photo } }),
+              _vm._v(" "),
+              _c("div", { staticClass: "movie-btn" }, [
+                _c("div", { staticClass: "btn-transform transform-vertical" }, [
+                  _c("div", [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "item item-1 yellowbtn",
+                        attrs: { href: "#" }
+                      },
+                      [
+                        _c("i", { staticClass: "ion-card" }),
+                        _vm._v(_vm._s(_vm.film.ticket_price))
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-8 col-sm-12 col-xs-12" }, [
+            _c("div", { staticClass: "movie-single-ct main-content" }, [
+              _c("h1", { staticClass: "bd-hd" }, [
+                _vm._v(_vm._s(_vm.film.name) + " "),
+                _c("span", [_vm._v(_vm._s(_vm.film.release_date))])
+              ]),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "movie-rate" }, [
+                _c("div", { staticClass: "rate" }, [
+                  _c("i", { staticClass: "ion-android-star" }),
+                  _vm._v(" "),
+                  _c("p", [
+                    _c("span", [_vm._v(_vm._s(_vm.film.rating))]),
+                    _vm._v(" /5"),
+                    _c("br")
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "movie-tabs" }, [
+                _c("div", { staticClass: "tabs" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "tab-content" }, [
+                    _c(
+                      "div",
+                      { staticClass: "tab active", attrs: { id: "overview" } },
+                      [
+                        _c("div", { staticClass: "row" }, [
+                          _c(
+                            "div",
+                            { staticClass: "col-md-8 col-sm-12 col-xs-12" },
+                            [
+                              _c("p", [_vm._v(_vm._s(_vm.film.description))]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "title-hd-sm" }, [
+                                _c("h4", [_vm._v("User reviews")]),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  { staticClass: "time", attrs: { href: "#" } },
+                                  [
+                                    _vm._v(
+                                      "See All " +
+                                        _vm._s(_vm.film.comments.length) +
+                                        " Reviews "
+                                    ),
+                                    _c("i", {
+                                      staticClass: "ion-ios-arrow-right"
+                                    })
+                                  ]
+                                )
+                              ]),
+                              _vm._v(" "),
+                              _vm._l(_vm.film.comments, function(comment) {
+                                return _c(
+                                  "div",
+                                  {
+                                    key: comment.id,
+                                    staticClass: "mv-user-review-item"
+                                  },
+                                  [
+                                    _c("h3", [_vm._v(_vm._s(comment.name))]),
+                                    _vm._v(" "),
+                                    _c("p", { staticClass: "time" }, [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                          _vm._s(comment.created_at) +
+                                          " "
+                                      ),
+                                      _c("a", { attrs: { href: "#" } }, [
+                                        _vm._v(" " + _vm._s(comment.name))
+                                      ])
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("p", [_vm._v(_vm._s(comment.comment))])
+                                  ]
+                                )
+                              })
+                            ],
+                            2
+                          ),
+                          _vm._v(" "),
+                          _c("div", {
+                            staticClass: "col-md-4 col-xs-12 col-sm-12"
+                          })
+                        ])
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
-          _c("div", { staticClass: "panel panel-default" }, [
-            _c("div", { staticClass: "panel-heading" }, [
-              _vm._v("Single Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    I'm an example component!\n                "
-              )
-            ])
+    return _c("div", { staticClass: "hero mv-single-hero" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [
+      _c("a", { staticClass: "item item-2 yellowbtn", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "ion-card" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "social-btn" }, [
+      _c("a", { staticClass: "parent-btn", attrs: { href: "#" } }, [
+        _c("i", { staticClass: "ion-heart" }),
+        _vm._v(" Add to Favorite")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "hover-bnt" }, [
+        _c("a", { staticClass: "parent-btn", attrs: { href: "#" } }, [
+          _c("i", { staticClass: "ion-android-share-alt" }),
+          _vm._v("share")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "hvr-item" }, [
+          _c("a", { staticClass: "hvr-grow", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "ion-social-facebook" })
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "hvr-grow", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "ion-social-twitter" })
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "hvr-grow", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "ion-social-googleplus" })
+          ]),
+          _vm._v(" "),
+          _c("a", { staticClass: "hvr-grow", attrs: { href: "#" } }, [
+            _c("i", { staticClass: "ion-social-youtube" })
           ])
         ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "tab-links tabs-mv" }, [
+      _c("li", { staticClass: "active" }, [
+        _c("a", { attrs: { href: "#overview" } }, [_vm._v("Overview")])
       ])
     ])
   }
