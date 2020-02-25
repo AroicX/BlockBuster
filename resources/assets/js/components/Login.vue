@@ -19,7 +19,7 @@
                                 <div class="panel-body">
 
                                     <div v-if="error" class="alert alert-danger">
-                                        <p class="text-white" style="color: white !important">{{error}}</p>
+                                        <p class="text-white" style="color: red !important">{{error}}</p>
                                     </div>
 
                                     <form @submit="login">

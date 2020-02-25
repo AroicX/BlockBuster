@@ -59,6 +59,9 @@
 							<li>
 								<router-link to="/films">Films</router-link>
 							</li>
+							<li>
+								<router-link to="/create">Create Film</router-link>
+							</li>
 							<li class="loginLink">
 								<router-link to="/login">LOG In</router-link>
 							</li>

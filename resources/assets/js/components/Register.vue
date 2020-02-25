@@ -19,21 +19,21 @@
                                 <div class="panel-body">
 
                                     <div v-if="error" class="alert alert-danger">
-                                        <p class="text-white" style="color: white !important">{{error}}</p>
+                                        <p class="text-white" style="color: red !important">{{error}}</p>
                                     </div>
 
                                     <form @submit="register">
                                         <div class="form-group">
                                             <label for="name">Name</label>
-                                            <input type="text" v-model="name" name="name" class="form-control">
+                                            <input type="text" v-model="name" name="name" required class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="text" v-model="email" name="email" class="form-control">
+                                            <input type="text" v-model="email" name="email" required class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label for="password">Password</label>
-                                            <input type="password" v-model="password" name="password" class="form-control">
+                                            <input type="password" v-model="password" name="password" required class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <button class="btn btn-info" type="submit">Create Account</button>
@@ -97,14 +97,7 @@
                         console.log(res)
                         console.log(res.data.status)
                         if (res.data.status === 'ok') {
-                            let userData = JSON.stringify({
-                                token: res.data.token,
-                                user: res.data.user,
-
-                            });
-
-                            localStorage.setItem('staleState', userData);
-
+                        
                             window.location.replace('#/login')
 
                         }
@@ -112,7 +105,7 @@
                     })
                     .catch(err => {
 
-                        this.error = 'Email or Password not vaild'
+                        this.error = 'Server Errror'
 
                         console.error(err)
                     });
