@@ -2018,6 +2018,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 //
 //
 //
@@ -2069,9 +2073,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      email: '',
+      password: '',
+      error: ''
+    };
+  },
   mounted: function mounted() {
-    console.log('Component ready.');
+    var cache = localStorage.staleState;
+
+    if (cache && _typeof(JSON.parse(cache)) === 'object') {
+      return window.location.replace('#/films');
+    }
+  },
+  methods: {
+    login: function login(e) {
+      var _this = this;
+
+      e.preventDefault();
+      var data = {
+        email: this.email,
+        password: this.password
+      };
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/auth/login", data).then(function (res) {
+        console.log(res);
+        console.log(res.data.status);
+
+        if (res.data.status === 'ok') {
+          var userData = JSON.stringify({
+            token: res.data.token,
+            user: res.data.user
+          });
+          localStorage.setItem('staleState', userData);
+          window.location.replace('#/films');
+        }
+      })["catch"](function (err) {
+        _this.error = 'Email or Password not vaild';
+        console.error(err);
+      });
+    }
   }
 });
 
@@ -2088,6 +2136,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2226,11 +2276,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      film: []
+      film_id: '',
+      film: [],
+      name: '',
+      comment: '',
+      msg: '',
+      loading: false
     };
   },
   created: function created() {
@@ -2241,17 +2299,49 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var result = _objectSpread({}, res.data.data);
 
       _this.film = result;
+      _this.film_id = id;
     })["catch"](function (err) {
       return console.error;
     });
   },
   methods: {
     createComment: function createComment(e) {
+      var _this2 = this;
+
       e.preventDefault();
+      var cache = localStorage.staleState;
+
+      if (cache && _typeof(JSON.parse(cache)) === 'object') {
+        this.loading = true;
+      } else {
+        return window.location.replace('/login');
+      }
+
+      var data = {
+        film_id: this.film.id,
+        name: this.name,
+        comment: this.comment
+      };
+      var storage = JSON.parse(localStorage.getItem('staleState'));
+      var token = storage.token;
+      console.log(storage);
+      console.log(token);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/comments/create", data, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer ".concat(token)
+        }
+      }).then(function (res) {
+        console.log(res.data);
+
+        _this2.film.comments.push(res.data.data);
+
+        _this2.loading = false;
+        _this2.msg = 'Comment has been added successfully';
+      })["catch"](function (err) {
+        return console.error(err);
+      });
     }
-  },
-  mounted: function mounted() {
-    console.log('Component ready.');
   }
 });
 
@@ -33224,85 +33314,131 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "slider movie-items" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "social-link" }, [
-            _c("p", [_vm._v("Follow us: ")]),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "ion-social-facebook" })
-            ]),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "ion-social-twitter" })
-            ]),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "ion-social-googleplus" })
-            ]),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [
-              _c("i", { staticClass: "ion-social-youtube" })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "container py-5" }, [
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-6 col-md-offset-2" }, [
-                _c("div", { staticClass: "panel panel-default" }, [
-                  _c("div", { staticClass: "panel-heading" }, [
-                    _vm._v("Login ")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "panel-body" }, [
-                    _c("form", { attrs: { action: "" } }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "email" } }, [
-                          _vm._v("Email")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: { type: "text", name: "email" }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("label", { attrs: { for: "password" } }, [
-                          _vm._v("Password")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: { type: "text", name: "password" }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "form-group" }, [
+  return _c("div", { staticClass: "slider movie-items" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "container py-5" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-6 col-md-offset-2" }, [
+              _c("div", { staticClass: "panel panel-default" }, [
+                _c("div", { staticClass: "panel-heading" }, [_vm._v("Login ")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "panel-body" }, [
+                  _vm.error
+                    ? _c("div", { staticClass: "alert alert-danger" }, [
                         _c(
-                          "button",
+                          "p",
                           {
-                            staticClass: "btn btn-info",
-                            attrs: { type: "submit" }
+                            staticClass: "text-white",
+                            staticStyle: { color: "white !important" }
                           },
-                          [_vm._v("Login")]
+                          [_vm._v(_vm._s(_vm.error))]
                         )
                       ])
-                    ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("form", { on: { submit: _vm.login } }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "email" } }, [
+                        _vm._v("Email")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.email,
+                            expression: "email"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "text", name: "email" },
+                        domProps: { value: _vm.email },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.email = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "password" } }, [
+                        _vm._v("Password")
+                      ]),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.password,
+                            expression: "password"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        attrs: { type: "password", name: "password" },
+                        domProps: { value: _vm.password },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.password = $event.target.value
+                          }
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _vm._m(1)
                   ])
                 ])
               ])
             ])
           ])
         ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "social-link" }, [
+      _c("p", [_vm._v("Follow us: ")]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "ion-social-facebook" })
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "ion-social-twitter" })
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "ion-social-googleplus" })
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" } }, [
+        _c("i", { staticClass: "ion-social-youtube" })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group" }, [
+      _c("button", { staticClass: "btn btn-info", attrs: { type: "submit" } }, [
+        _vm._v("Login")
       ])
     ])
   }
@@ -33407,7 +33543,7 @@ var render = function() {
                                     _vm._v(
                                       "See All " +
                                         _vm._s(_vm.film.comments.length) +
-                                        " Reviews "
+                                        "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tReviews "
                                     ),
                                     _c("i", {
                                       staticClass: "ion-ios-arrow-right"
@@ -33457,11 +33593,137 @@ var render = function() {
                                 "form",
                                 { on: { submit: _vm.createComment } },
                                 [
-                                  _vm._m(4),
+                                  _vm.msg
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass: "alert alert-success",
+                                          staticStyle: {
+                                            color: "green !important"
+                                          }
+                                        },
+                                        [
+                                          _c(
+                                            "p",
+                                            {
+                                              staticClass: "text-white",
+                                              staticStyle: {
+                                                color: "green !important"
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                                                  _vm._s(_vm.msg)
+                                              )
+                                            ]
+                                          )
+                                        ]
+                                      )
+                                    : _vm._e(),
                                   _vm._v(" "),
-                                  _vm._m(5),
+                                  _vm.loading
+                                    ? _c("div", [
+                                        _c(
+                                          "p",
+                                          {
+                                            staticClass: "text-white",
+                                            staticStyle: {
+                                              color: "white !important"
+                                            }
+                                          },
+                                          [_vm._v("...Loading")]
+                                        )
+                                      ])
+                                    : _vm._e(),
                                   _vm._v(" "),
-                                  _vm._m(6)
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("label", { staticClass: "text-white" }, [
+                                      _vm._v("Name")
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.name,
+                                          expression: "name"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: {
+                                        type: "text",
+                                        name: "name",
+                                        required: ""
+                                      },
+                                      domProps: { value: _vm.name },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.name = $event.target.value
+                                        }
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c("label", { staticClass: "text-white" }, [
+                                      _vm._v(
+                                        "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tComment\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                      )
+                                    ]),
+                                    _vm._v(" "),
+                                    _c("textarea", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.comment,
+                                          expression: "comment"
+                                        }
+                                      ],
+                                      staticClass: "form-control",
+                                      attrs: {
+                                        type: "text",
+                                        name: "comment",
+                                        required: ""
+                                      },
+                                      domProps: { value: _vm.comment },
+                                      on: {
+                                        input: function($event) {
+                                          if ($event.target.composing) {
+                                            return
+                                          }
+                                          _vm.comment = $event.target.value
+                                        }
+                                      }
+                                    })
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "form-group" }, [
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-info btn-lg",
+                                        attrs: { n: "" },
+                                        on: {
+                                          click: function($event) {
+                                            {
+                                              _vm.createComment
+                                            }
+                                          }
+                                        }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tSubmit\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
+                                        )
+                                      ]
+                                    )
+                                  ])
                                 ]
                               )
                             ]
@@ -33545,48 +33807,6 @@ var staticRenderFns = [
     return _c("ul", { staticClass: "tab-links tabs-mv" }, [
       _c("li", { staticClass: "active" }, [
         _c("a", { attrs: { href: "#overview" } }, [_vm._v("Overview")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "text-white" }, [_vm._v("Name")]),
-      _vm._v(" "),
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "name", required: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "text-white" }, [
-        _vm._v(
-          "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tComment\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
-        )
-      ]),
-      _vm._v(" "),
-      _c("textarea", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "comment", required: "" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c("button", { staticClass: "btn btn-info btn-lg" }, [
-        _vm._v(
-          "\n\t\t\t\t\t\t\t\t\t\t\t\t\t\tSubmit\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t"
-        )
       ])
     ])
   }
