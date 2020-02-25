@@ -11,12 +11,12 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<title>Films </title>
-	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
-
+	
+	
 	<!-- CSS files -->
 	<link rel="stylesheet" href="css/plugins.css">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
 
 </head>
@@ -60,10 +60,10 @@
 								<router-link to="/films">Films</router-link>
 							</li>
 							<li class="loginLink">
-								<router-link to="#">LOG In</router-link>
+								<router-link to="/login">LOG In</router-link>
 							</li>
 							<li class="btn signupLink">
-								<router-link to="#">sign up</router-link>
+								<router-link to="/register">sign up</router-link>
 							</li>
 						</ul>
 					</div>

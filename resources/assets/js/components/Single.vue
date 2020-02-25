@@ -83,7 +83,35 @@
 												</div>
 											</div>
 											<div class="col-md-4 col-xs-12 col-sm-12">
-											
+												  <h5 className="text-white">New Comment:</h5>
+												  
+												 <form @submit="createComment">
+													<div class="form-group">
+														<label class="text-white">Name</label>
+														<input
+														class="form-control"
+														type="text"
+														name="name"
+														required
+														/>
+													</div>
+													<div class="form-group">
+														<label class="text-white">
+														Comment
+														</label>
+														<textarea
+														class="form-control"
+														type="text"
+														name="comment"
+														required
+														></textarea>
+													</div>
+													<div class="form-group">
+														<button class="btn btn-info btn-lg" >
+														Submit
+														</button>
+													</div>
+													</form>
 											</div>
 										</div>
 									</div>
@@ -121,9 +149,15 @@
                    
                 })
                 .catch(err => console.error);
-        },
+		},
+		methods: {
+			createComment: function (e) {
+				e.preventDefault();
+				
+			}
+		},
         mounted() {
-          console.log(film)
+        
             console.log('Component ready.')
         }
     }
